@@ -210,9 +210,7 @@ public class ForecastFragment extends Fragment {
                 resultStrs[i] = day + " - " + description + " - " + highAndLow;
             }
 
-            for (String s : resultStrs) {
-                Log.v(LOG_TAG, "Forecast entry: " + s);
-            }
+
             return resultStrs;
 
         }
@@ -312,6 +310,16 @@ public class ForecastFragment extends Fragment {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            if(result != null){
+                mForecastAdapter.clear();
+                for(String dayForecastStr : result ){
+                    mForecastAdapter.add(dayForecastStr);
+                }
+            }
         }
     }
 }
